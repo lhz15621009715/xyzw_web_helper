@@ -5,7 +5,8 @@
         <n-notification-provider>
           <n-dialog-provider>
             <div id="app">
-              <router-view />
+              <AppLockScreen />
+              <router-view v-if="!isAppLocked" />
             </div>
           </n-dialog-provider>
         </n-notification-provider>
@@ -18,9 +19,13 @@
 import { computed, onMounted, onUnmounted } from "vue";
 import { darkTheme } from "naive-ui";
 import { useTheme } from "@/composables/useTheme";
+import { useAppLock } from "@/composables/useAppLock";
+import AppLockScreen from "@/components/AppLockScreen.vue";
 
 const { isDark, initTheme, setupSystemThemeListener, updateReactiveState } =
   useTheme();
+
+const { isLocked: isAppLocked } = useAppLock();
 
 // Naive UI 主题
 const naiveTheme = computed(() => {
