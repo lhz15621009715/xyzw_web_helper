@@ -16,8 +16,8 @@
 </template>
 
 <script setup>
-import { computed, onMounted, onUnmounted } from "vue";
 import { darkTheme } from "naive-ui";
+import { computed, onMounted, onUnmounted } from "vue";
 import { useTheme } from "@/composables/useTheme";
 import { useAppLock } from "@/composables/useAppLock";
 import AppLockScreen from "@/components/AppLockScreen.vue";
