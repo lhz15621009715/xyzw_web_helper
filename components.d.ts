@@ -20,6 +20,7 @@ declare module 'vue' {
     AListItem: typeof import('@arco-design/web-vue')['ListItem']
     AModal: typeof import('@arco-design/web-vue')['Modal']
     ApexChallenge: typeof import('./src/components/Apex/ApexChallenge.vue')['default']
+    AppLockScreen: typeof import('./src/components/AppLockScreen.vue')['default']
     ASpace: typeof import('@arco-design/web-vue')['Space']
     ATag: typeof import('@arco-design/web-vue')['Tag']
     AUpload: typeof import('@arco-design/web-vue')['Upload']
