@@ -615,7 +615,7 @@
       v-model:show="voteDialogVisible"
       preset="card"
       :title="`助威 ${voteTargetName || ''}`"
-      style="width: 380px"
+      style="width: min(380px, 90vw)"
       :bordered="false"
     >
       <div class="vote-dialog-body">

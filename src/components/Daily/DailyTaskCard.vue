@@ -77,7 +77,7 @@
       v-model:show="showSettings"
       preset="card"
       title="任务设置"
-      style="width: 480px"
+      style="width: min(480px, 90vw)"
     >
       <template #header>
         <div class="modal-header">

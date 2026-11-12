@@ -732,6 +732,47 @@ function resizeAndRedraw(canvas) {
   drawCanvasContent();
 }
 
+/**
+ * Calculate a scale factor so that the full canvas content (map + table)
+ * fits within the canvas width on small screens.
+ */
+function getContentScale() {
+  // Approximate full content width: 41 columns of hexagons + table
+  // hexWidth = 2 * hexSize = 26.5, col spacing = hexWidth * 0.75 + gap = 22.625
+  const mapWidth = 41 * (hexWidth * 0.75 + gap) + hexSize;
+  const tableCols = isLegionOrIndividual.value ? 8 : 9;
+  const tableColWidth = isLegionOrIndividual.value ? 88 : 78;
+  const tableWidth = tableCols * tableColWidth + 40;
+  const totalContentWidth = mapWidth + tableWidth;
+  return totalContentWidth;
+}
+
+function resizeAndRedrawResponsive(canvas) {
+  const container = canvas.parentElement;
+  const cssW = container.clientWidth;
+  const cssH = container.clientHeight;
+
+  // On small screens, set canvas width to fit content and allow horizontal scroll
+  const contentWidth = getContentScale();
+  const isSmallScreen = window.innerWidth <= 768;
+
+  let canvasCssW = cssW;
+  let canvasCssH = cssH;
+
+  if (isSmallScreen && contentWidth > cssW) {
+    // Set canvas to content width so nothing is clipped
+    canvasCssW = contentWidth;
+    canvasCssH = Math.max(cssH, contentWidth * 0.55); // maintain reasonable aspect ratio
+  }
+
+  canvas.style.width = canvasCssW + "px";
+  canvas.style.height = canvasCssH + "px";
+  canvas.width = canvasCssW * dpr;
+  canvas.height = canvasCssH * dpr;
+  ctx.scale(dpr, dpr);
+  drawCanvasContent();
+}
+
 const connectWebSocket = () => {
   if (!tokenStore.selectedToken) {
     message.warning("请先选择一个Token");
@@ -809,7 +850,7 @@ const fetchBattleRecords1 = async (getbattlefield) => {
       if (cmd.includes("war_getbattlefieldinfo")) {
         console.log(message.rawData);
         result.value = message?.rawData;
-        resizeAndRedraw(legionWarMapDom.value);
+        resizeAndRedrawResponsive(legionWarMapDom.value);
       }
     });
     legionWarWebSocket.onDisconnect = (event) => {
@@ -844,7 +885,7 @@ onMounted(() => {
   const canvas = legionWarMapDom.value;
   ctx = canvas.getContext("2d");
 
-  resizeHandler = () => resizeAndRedraw(canvas);
+  resizeHandler = () => resizeAndRedrawResponsive(canvas);
   resizeHandler(); // 初始化
   //增加鼠标移动事件
   // canvas.addEventListener('mousemove', (e) => {
@@ -896,7 +937,8 @@ onUnmounted(() => {
     .map-container {
       width: 100%;
       height: 100%;
-      min-height: 60vh; /* Ensure map has height on mobile */
+      min-height: 60vh;
+      overflow: auto; /* Allow scroll on small screens */
       .mapCanvas {
         width: 100%;
         height: 100%;
@@ -961,7 +1003,10 @@ onUnmounted(() => {
       }
 
       .map-container {
-        min-height: 50vh;
+        min-height: 45vh;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
       }
     }
 
@@ -970,12 +1015,12 @@ onUnmounted(() => {
       padding: var(--spacing-xs);
 
       .legion-war-operation-container {
-        flex-direction: row; /* Horizontal layout for operations on mobile if space allows, or keep column */
+        flex-direction: row;
         flex-wrap: wrap;
         gap: var(--spacing-md);
 
         .legion-war-operation-item {
-          width: 100%; /* Keep items full width for better touch targets */
+          width: 100%;
           padding: var(--spacing-xs) 0;
           border-bottom: 1px solid var(--border-light);
 

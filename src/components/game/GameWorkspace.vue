@@ -647,6 +647,8 @@ iframe {
   color: #758197;
   font-size: 12px;
 }
+
+/* ── Tablet ── */
 @media (max-width: 768px) {
   .game-workspace {
     top: 56px;
@@ -659,69 +661,19 @@ iframe {
   .workspace-heading h1 {
     font-size: 18px;
   }
-  .account-list {
-    width: 100%;
-    padding: 10px;
-    gap: 8px;
-  }
-  .account-heading {
-    cursor: pointer;
-    user-select: none;
-  }
-  .account-scroll {
-    display: none;
-  }
-  .account-list.expanded .account-scroll {
-    display: flex;
-    gap: 10px;
-    overflow: auto;
-  }
 }
 
-/* Mobile: full-width game panels */
+/* ── Mobile: abandon fixed layout, use normal document flow scroll ── */
 @media (max-width: 640px) {
-  .workspace-body {
-    flex-direction: column;
+  .game-workspace {
+    position: static;
+    inset: auto;
+    z-index: auto;
+    padding: 8px 10px 24px;
     gap: 8px;
   }
-  .account-list {
-    width: auto;
-    max-height: none;
-    flex-shrink: 0;
-  }
-  .account-list:not(.expanded) {
-    max-height: 44px;
-    overflow: hidden;
-  }
-  .account-list.expanded {
-    max-height: 180px;
-  }
-  .account-scroll {
-    display: flex;
-    gap: 10px;
-    overflow: auto;
-  }
-  .account-row {
-    min-width: 160px;
-  }
-  .game-area {
-    flex: 1;
-    overflow: visible;
-  }
-  .game-grid {
-    gap: 8px;
-  }
-  .game-grid.automatic {
-    grid-template-columns: 1fr;
-  }
-  .game-panel {
-    width: 100% !important;
-    max-width: 100%;
-  }
-  .game-screen {
-    aspect-ratio: 9 / 16;
-    width: 100%;
-    max-height: calc(100vh - 220px);
+  .workspace-heading {
+    gap: 6px;
   }
   .workspace-heading p {
     display: none;
@@ -729,6 +681,65 @@ iframe {
   .workspace-heading .n-space {
     flex-wrap: wrap;
     gap: 6px;
+  }
+  .workspace-body {
+    flex-direction: column;
+    gap: 8px;
+    flex: none;
+    min-height: 0;
+  }
+  /* Collapsible account list */
+  .account-list {
+    width: 100%;
+    padding: 8px 10px;
+    gap: 6px;
+    flex-shrink: 0;
+    max-height: 40px;
+    overflow: hidden;
+    transition: max-height 0.2s ease;
+  }
+  .account-list.expanded {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  .account-heading {
+    cursor: pointer;
+    user-select: none;
+  }
+  .account-heading .n-button {
+    flex-shrink: 0;
+  }
+  .account-scroll {
+    min-height: 0;
+    overflow-y: auto;
+    flex: 1;
+  }
+  /* Game area: no internal scroll, let page scroll */
+  .game-area {
+    flex: none;
+    overflow: visible;
+    width: 100%;
+  }
+  .game-grid {
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+  .game-grid.automatic {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: none;
+  }
+  .game-panel {
+    width: 100% !important;
+    max-width: 100%;
+    order: 0 !important;
+  }
+  .panel-heading {
+    padding: 6px 8px;
+  }
+  .panel-heading strong {
+    font-size: 11px;
   }
   .panel-toolbar {
     gap: 3px;
@@ -739,6 +750,16 @@ iframe {
   }
   .fps {
     font-size: 9px;
+  }
+  /* Game screen: full viewport width, capped height to fit one screen */
+  .game-screen {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    max-height: 70vh;
+  }
+  .workspace-empty {
+    margin-top: 40px;
+    padding: 16px;
   }
 }
 </style>
