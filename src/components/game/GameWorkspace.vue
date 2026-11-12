@@ -699,7 +699,7 @@ iframe {
     transition: max-height 0.2s ease;
   }
   .account-list.expanded {
-    max-height: 200px;
+    max-height: 240px;
     overflow-y: auto;
   }
   .account-heading {
@@ -709,30 +709,45 @@ iframe {
   .account-heading .n-button {
     flex-shrink: 0;
   }
-  .account-scroll {
-    min-height: 0;
-    overflow-y: auto;
-    flex: 1;
+  /* Horizontal scroll for account cards on mobile */
+  .account-list.expanded .account-scroll {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
   }
-  /* Game area: no internal scroll, let page scroll */
+  .account-list.expanded .account-row {
+    min-width: 180px;
+    flex-shrink: 0;
+  }
+  /* Game area: horizontal scroll for multiple windows */
   .game-area {
     flex: none;
-    overflow: visible;
+    overflow-x: auto;
+    overflow-y: hidden;
     width: 100%;
+    -webkit-overflow-scrolling: touch;
   }
   .game-grid {
     gap: 8px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
   }
   .game-grid.automatic {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     grid-template-columns: none;
   }
   .game-panel {
-    width: 100% !important;
+    width: 85vw !important;
+    min-width: 260px;
     max-width: 100%;
+    flex-shrink: 0;
     order: 0 !important;
   }
   .panel-heading {
@@ -751,11 +766,11 @@ iframe {
   .fps {
     font-size: 9px;
   }
-  /* Game screen: full viewport width, capped height to fit one screen */
+  /* Game screen: capped height for horizontal scroll layout */
   .game-screen {
     width: 100%;
     aspect-ratio: 9 / 16;
-    max-height: 70vh;
+    max-height: 60vh;
   }
   .workspace-empty {
     margin-top: 40px;
