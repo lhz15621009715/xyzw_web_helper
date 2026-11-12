@@ -206,7 +206,7 @@
       v-model:show="showPlayerInfoModal"
       preset="card"
       title="对手信息"
-      :style="{ width: '800px' }"
+      :style="{ width: '90vw', maxWidth: '800px' }"
       :bordered="false"
       :segmented="{ content: 'soft', footer: 'soft' }"
       :show-close="false"
@@ -505,7 +505,7 @@
       size="large"
       :bordered="false"
       :segmented="{ content: 'soft', footer: 'soft' }"
-      :style="{ width: '600px' }"
+      :style="{ width: '90vw', maxWidth: '600px' }"
       :show-close="true"
     >
       <template #header-extra>
@@ -2364,7 +2364,8 @@ onMounted(() => {
 // 表格内容区
 .table-content {
   flex: 1;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   display: flex;
   flex-direction: column;
   background: var(--bg-primary);

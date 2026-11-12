@@ -159,7 +159,7 @@
       v-model:show="showPlayerInfoModal"
       preset="card"
       title="对手信息"
-      :style="{ width: '800px' }"
+      :style="{ width: '90vw', maxWidth: '800px' }"
       :bordered="false"
       :segmented="{ content: 'soft', footer: 'soft' }"
       :show-close="false"
@@ -438,7 +438,7 @@
       size="large"
       :bordered="false"
       :segmented="{ content: 'soft', footer: 'soft' }"
-      :style="{ width: '600px' }"
+      :style="{ width: '90vw', maxWidth: '600px' }"
       :show-close="true"
     >
       <template #header-extra>
@@ -1395,7 +1395,8 @@ onMounted(() => {
 // 表格内容区
 .table-content {
   flex: 1;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   display: flex;
   flex-direction: column;
   background: var(--bg-primary);
@@ -2216,6 +2217,16 @@ onMounted(() => {
 
 /* 响应式设计 */
 @media (max-width: 768px) {
+  .club-warrank-container {
+    overflow-x: auto;
+  }
+  .club-warrank-card {
+    overflow-x: auto;
+  }
+  .table-content {
+    overflow-x: auto;
+    height: auto;
+  }
   .result-header {
     flex-direction: column;
     align-items: flex-start;
@@ -2240,6 +2251,12 @@ onMounted(() => {
     align-self: center;
     margin: 5px 0;
     transform: rotate(90deg);
+  }
+  .player-heroes {
+    margin-top: 12px;
+  }
+  .hero-list {
+    grid-template-columns: 1fr;
   }
 }
 

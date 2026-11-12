@@ -698,4 +698,49 @@ onUnmounted(() => {
 .empty-card button {
   padding: 9px 18px;
 }
+
+@media (max-width: 768px) {
+  .multi-game-toolbar {
+    gap: 6px;
+    padding: 6px 8px;
+  }
+  .toolbar-button {
+    padding: 5px 8px;
+    font-size: 13px;
+  }
+  .toolbar-title {
+    font-size: 14px;
+  }
+  .toolbar-warning {
+    display: none;
+  }
+  .game-strip {
+    gap: 8px;
+    padding: 8px;
+  }
+  .game-panel {
+    flex: 0 0 min(clamp(240px, 70vw, 360px), calc((100dvh - 112px) * 9 / 16));
+  }
+  .game-panel-header {
+    gap: 4px;
+    padding: 3px 6px;
+  }
+  .empty-card {
+    max-width: 90vw;
+    padding: 20px;
+  }
+  .empty-card h1 {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-panel {
+    flex: 0 0 min(clamp(200px, 85vw, 280px), calc((100dvh - 112px) * 9 / 16));
+  }
+  .toolbar-button {
+    padding: 4px 6px;
+    font-size: 12px;
+  }
+}
 </style>

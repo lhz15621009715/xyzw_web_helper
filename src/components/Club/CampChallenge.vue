@@ -1169,7 +1169,7 @@
       v-model:show="showDuelModal"
       preset="card"
       :title="`成员攻防战况流水 - ${targetPlayer?.name || ''}${targetPlayer?.mirror ? '（镜像据点）' : ''}`"
-      :style="{ width: '740px' }"
+      :style="{ width: '90vw', maxWidth: '740px' }"
       :bordered="false"
       :segmented="{ content: 'soft', footer: 'soft' }"
     >

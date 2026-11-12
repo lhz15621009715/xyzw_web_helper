@@ -37,7 +37,7 @@
           :close-on-esc="true"
           preset="card"
           :show-footer="false"
-          :style="{ width: '700px', maxHeight: '80vh' }"
+          :style="{ width: '90vw', maxWidth: '700px', maxHeight: '80vh' }"
           :content-style="{
             padding: '0',
             maxHeight: 'calc(80vh - 60px)',
@@ -74,7 +74,7 @@
           <div v-else class="apply-list-container">
             <div
               class="apply-list"
-              :style="{ maxHeight: '800px', overflowY: 'auto' }"
+              :style="{ maxHeight: '60vh', overflowY: 'auto' }"
             >
               <div
                 v-for="apply in applyList"
@@ -420,7 +420,7 @@
     v-model:show="showPlayerInfoModal"
     preset="card"
     title="成员信息"
-    :style="{ width: '800px' }"
+    :style="{ width: '90vw', maxWidth: '800px' }"
     :bordered="false"
     :segmented="{ content: 'soft', footer: 'soft' }"
     :show-close="false"
@@ -551,7 +551,7 @@
     class="hero-detail-modal"
     preset="card"
     title="武将详情"
-    :style="{ width: '600px' }"
+    :style="{ width: '90vw', maxWidth: '600px' }"
     :bordered="false"
     :segmented="{ content: 'soft', footer: 'soft' }"
   >

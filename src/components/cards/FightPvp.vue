@@ -364,7 +364,7 @@
       size="large"
       :bordered="false"
       :segmented="{ content: 'soft', footer: 'soft' }"
-      :style="{ width: '600px' }"
+      :style="{ width: '90vw', maxWidth: '600px' }"
     >
       <template #header-extra>
         <span class="hero-id">武将ID: {{ heroModealTemp?.heroId }}</span>

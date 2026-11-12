@@ -30,8 +30,14 @@
       >{{ launcher.notice }}</NAlert
     >
     <div class="workspace-body">
-      <aside class="account-list">
-        <div class="account-heading">
+      <aside
+        class="account-list"
+        :class="{ expanded: accountListExpanded }"
+      >
+        <div
+          class="account-heading"
+          @click="accountListExpanded = !accountListExpanded"
+        >
           <strong>账号 · {{ accounts.length }}</strong
           ><NButton text type="primary" @click="router.push('/tokens')"
             >管理 Tokens</NButton
@@ -321,6 +327,7 @@ const showDefaults = ref(false);
 const showWindowSettings = ref(false);
 const editingId = ref("");
 const editing = reactive({ width: 360, height: 640, fps: 30, speed: 1.2 });
+const accountListExpanded = ref(false);
 const labels = {
   preparing: "准备中",
   loading: "加载中",
@@ -643,33 +650,95 @@ iframe {
 @media (max-width: 768px) {
   .game-workspace {
     top: 56px;
-    padding: 12px;
+    padding: 8px;
+    gap: 8px;
+  }
+  .workspace-heading {
+    gap: 8px;
+  }
+  .workspace-heading h1 {
+    font-size: 18px;
   }
   .account-list {
-    width: 190px;
+    width: 100%;
+    padding: 10px;
+    gap: 8px;
+  }
+  .account-heading {
+    cursor: pointer;
+    user-select: none;
+  }
+  .account-scroll {
+    display: none;
+  }
+  .account-list.expanded .account-scroll {
+    display: flex;
+    gap: 10px;
+    overflow: auto;
   }
 }
+
+/* Mobile: full-width game panels */
 @media (max-width: 640px) {
   .workspace-body {
     flex-direction: column;
+    gap: 8px;
   }
   .account-list {
     width: auto;
-    max-height: 220px;
+    max-height: none;
+    flex-shrink: 0;
+  }
+  .account-list:not(.expanded) {
+    max-height: 44px;
+    overflow: hidden;
+  }
+  .account-list.expanded {
+    max-height: 180px;
   }
   .account-scroll {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     overflow: auto;
   }
   .account-row {
-    min-width: 180px;
+    min-width: 160px;
+  }
+  .game-area {
+    flex: 1;
+    overflow: visible;
+  }
+  .game-grid {
+    gap: 8px;
   }
   .game-grid.automatic {
     grid-template-columns: 1fr;
   }
+  .game-panel {
+    width: 100% !important;
+    max-width: 100%;
+  }
+  .game-screen {
+    aspect-ratio: 9 / 16;
+    width: 100%;
+    max-height: calc(100vh - 220px);
+  }
   .workspace-heading p {
     display: none;
+  }
+  .workspace-heading .n-space {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .panel-toolbar {
+    gap: 3px;
+    padding: 0 6px 6px;
+  }
+  .panel-toolbar .n-button {
+    padding: 0 6px;
+  }
+  .fps {
+    font-size: 9px;
   }
 }
 </style>

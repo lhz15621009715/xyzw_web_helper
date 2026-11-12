@@ -206,6 +206,14 @@
               </template>
               主线推关
             </n-button>
+            <n-button type="primary" @click="goToLinkGames">
+              <template #icon>
+                <NIcon>
+                  <GameController />
+                </NIcon>
+              </template>
+              在线游戏
+            </n-button>
 
             <n-button
               v-if="!showImportForm"
@@ -1900,6 +1908,10 @@ const goToDashboard = () => {
 
 const goToPushingLevels = () => {
   router.push("/admin/PushingLevels");
+};
+
+const goToLinkGames = () => {
+  router.push("/admin/Link-Games");
 };
 
 // ============ BIN 格式转换（来自 convertBin.mjs） ============

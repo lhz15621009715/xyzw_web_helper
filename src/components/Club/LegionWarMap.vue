@@ -756,7 +756,8 @@ onUnmounted(() => {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 600px; /* 给个固定高度或者 min-height */
+      min-height: 400px;
+      height: auto;
       padding: 40px;
     }
 
@@ -1010,8 +1011,28 @@ onUnmounted(() => {
     }
   }
 
+  .main-content-layout {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+
   .map-container-wrapper {
     height: 400px !important;
+    flex: none;
+  }
+
+  .side-info-panel {
+    width: 100%;
+    height: auto;
+    border-left: none;
+    border-top: 1px solid #eee;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-container-wrapper {
+    height: 300px !important;
   }
 }
 </style>

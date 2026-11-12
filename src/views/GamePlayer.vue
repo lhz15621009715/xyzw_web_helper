@@ -26,14 +26,16 @@ function goBack() {
   inset: 0;
   z-index: 1;
   background: #000;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .iframe-wrapper {
   position: absolute;
-  top: 0;
+  top: env(safe-area-inset-top, 0);
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: env(safe-area-inset-bottom, 0);
 }
 
 .game-iframe {
@@ -45,7 +47,7 @@ function goBack() {
 
 .back-btn {
   position: absolute;
-  top: 8px;
+  top: calc(8px + env(safe-area-inset-top, 0));
   left: 8px;
   z-index: 200;
   background: rgba(0, 0, 0, 0.5);
