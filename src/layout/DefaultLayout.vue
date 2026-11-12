@@ -78,6 +78,17 @@
             </n-icon>
             <span>消息测试</span>
           </router-link>
+          <!-- Full backup / restore entry -->
+          <router-link
+            to="/admin/backup"
+            class="nav-item"
+            active-class="active"
+          >
+            <n-icon>
+              <Archive />
+            </n-icon>
+            <span>备份恢复</span>
+          </router-link>
           <router-link
             to="/admin/legion-war"
             class="nav-item"
@@ -198,6 +209,16 @@
           <span>消息测试</span>
         </router-link>
         <router-link
+          to="/admin/backup"
+          class="drawer-item"
+          @click="isMobileMenuOpen = false"
+        >
+          <n-icon>
+            <Archive />
+          </n-icon>
+          <span>备份恢复</span>
+        </router-link>
+        <router-link
           to="/admin/legion-war"
           class="nav-item"
           active-class="active"
@@ -228,6 +249,7 @@
 
 <script setup>
 import {
+  Archive,
   ArrowUpCircle,
   ChatbubbleEllipsesSharp,
   ChevronDown,
